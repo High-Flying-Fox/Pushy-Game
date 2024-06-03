@@ -74,6 +74,7 @@ function keyPressed() {
             if (boxY == playerY + 1) {
                 if (boxY !== cols - 1) {
                     playerY += 1
+                    boxY += 1
                 }
             } else {
                 playerY += 1
