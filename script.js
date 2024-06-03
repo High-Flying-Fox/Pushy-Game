@@ -92,7 +92,14 @@ function keyPressed() {
     }
     if (key == 'w') {
         if (playerY !== 0) {
-            playerY -= 1
+            if (boxIndex == playerIndex - cols) {
+                if (boxY != cols - 1) {
+                    playerY -= 1
+                    boxY -= 1
+                }
+            } else {
+                playerY -= 1
+            }
         }
     }
     if (key == 'a') {
