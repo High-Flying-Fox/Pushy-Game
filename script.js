@@ -74,9 +74,12 @@ function keyPressed() {
     grid[playerY][playerX].char = " "
     grid[boxY][boxX].char = " "
 
+    playerIndex = vectorToIndex(playerX, playerY)
+    boxIndex = vectorToIndex(boxX, boxY)
+
     if (key == 's') {
         if (playerY !== cols - 1) {
-            if (boxIndex == playerIndex + rows) {
+            if (boxIndex == playerIndex + colss) {
                 if (boxY !== cols - 1) {
                     playerY += 1
                     boxY += 1
