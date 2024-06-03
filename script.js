@@ -48,7 +48,7 @@ grid = make2DArray(cols, rows);
 
 for (let i = 0; i < cols; i++) {
     for (let j = 0; j < rows; j++) {
-        grid[i][j] = new Spot(vectorToIndex(i, j), " ")
+        grid[i][j] = new Spot(vectorToIndex(j, i), " ")
     }
 }
 
