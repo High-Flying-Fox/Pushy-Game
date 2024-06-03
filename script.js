@@ -8,7 +8,9 @@ function Spot(index, char) {
     }
 }
 
-
+function vectorToIndex(x, y) {
+    return (x + 1) + y * 5
+}
 
 grid = []
 
@@ -17,12 +19,15 @@ rows = 5
 
 playerX = 0
 playerY = 0
+playerIndex = vectorToIndex(playerX, playerY)
 
 boxX = 2
 boxY = 2
+boxIndex = vectorToIndex(boxX, boxY)
 
 targetX = 3
 targetY = 0
+targetIndex = vectorToIndex(targetX, targetY)
 
 function make2DArray(cols, rows) {
     
@@ -43,7 +48,7 @@ grid = make2DArray(cols, rows);
 
 for (let i = 0; i < cols; i++) {
     for (let j = 0; j < rows; j++) {
-        grid[i][j] = new Spot((j + 1) + i * 5, " ")
+        grid[i][j] = new Spot(vectorToIndex(i, j), " ")
     }
 }
 
@@ -71,13 +76,11 @@ function keyPressed() {
 
     if (key == 's') {
         if (playerY !== cols - 1) {
-            if (boxY == playerY + 1) {
+            if (boxIndex == playerIndex + rows) {
                 if (boxY !== cols - 1) {
                     playerY += 1
                     boxY += 1
                 }
-            } else {
-                playerY += 1
             }
             
         }
