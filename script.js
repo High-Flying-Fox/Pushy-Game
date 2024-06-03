@@ -78,7 +78,7 @@ function keyPressed() {
     boxIndex = vectorToIndex(boxX, boxY)
 
     if (key == 's') {
-        if (playerY !== cols - 1) {
+        if (playerY != cols - 1) {
             if (boxIndex == playerIndex + cols) {
                 if (boxY != cols - 1) {
                     playerY += 1
