@@ -79,11 +79,13 @@ function keyPressed() {
 
     if (key == 's') {
         if (playerY !== cols - 1) {
-            if (boxIndex == playerIndex + colss) {
-                if (boxY !== cols - 1) {
+            if (boxIndex == playerIndex + cols) {
+                if (boxY != cols - 1) {
                     playerY += 1
                     boxY += 1
                 }
+            } else {
+                playerY += 1
             }
             
         }
