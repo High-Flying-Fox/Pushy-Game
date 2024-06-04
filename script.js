@@ -103,8 +103,8 @@ function keyPressed() {
         }
     }
     if (key == 'a') {
-        if (playerX !== 0) {
-            if (boxIndex == playerIndex - rows) {
+        if (playerX != 0) {
+            if (boxIndex = playerIndex - 1) {
                 if (boxX != 0) {
                     playerX -= 1
                     boxX -= 1
