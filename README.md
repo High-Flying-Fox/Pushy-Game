@@ -1,2 +1,2 @@
 # Pushy-Game
-this game is pushy
+this project is pushing me to my limit
