@@ -10,6 +10,12 @@ class spot {
         push()
 
         translate(this.x, this.y)
+        //ImageMode(Center)
+
+       // if (override == 7) {
+        //    rotate(pisdir)
+        //}
+
         if (override == null) {
             image(costumes[this.char], 0, 0)
         } else {
@@ -26,5 +32,9 @@ class spot {
                 this.char = 3
             }
         }
+    }
+
+    trigger(freqency, signal) {
+
     }
 }

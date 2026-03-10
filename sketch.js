@@ -5,6 +5,7 @@ let playerx = 1, playery = 1
 let boxx = 3, boxy = 3
 let gatex = 4, gatey = 1
 let ykeyx = -1, ykeyy = -1
+let pisx = -1, pisy = -1, pisfreq = 0
 let level = 1
 
 function preload() {
@@ -15,6 +16,9 @@ function preload() {
   costumes[4] = loadImage("art/sprite_4.png")
   costumes[5] = loadImage("art/sprite_5.png")
   costumes[6] = loadImage("art/sprite_6.png")
+  costumes[7] = loadImage("art/sprite_7.png")
+  costumes[8] = loadImage("art/sprite_8.png")
+  costumes[9] = loadImage("art/sprite_9.png")
 }
 
 function setup() {
@@ -48,6 +52,8 @@ function draw() {
         grid[i][j].show(1)
       } else if (j == ykeyx && i == ykeyy) {
         grid[i][j].show(6)
+      } else if (j == pisx && i == pisy) {
+        grid[i][j].show(7)
       } else {
         grid[i][j].show()
       }
@@ -157,5 +163,37 @@ function levelchange(level) {
 
     grid[3][1].char = 4
     grid[3][2].char = 5
+  }
+  if (level == 4) {
+    playerx = 1
+    playery = 2
+    boxx = 2
+    boxy = 2
+    gatex = 5
+    gatey = 5
+
+    ykeyx = 2
+    ykeyy = 1
+
+    pisx = 2
+    pisy = 0
+
+    grid[3][1].char = 3
+    grid[3][3].char = 3
+    grid[3][4].char = 3
+    grid[3][5].char = 3
+
+    grid[1][1].char = 4
+    grid[1][4].char = 4
+
+    grid[4][3].char = 4
+    grid[4][4].char = 4
+    grid[4][5].char = 4
+
+    grid[4][1].char = 5
+    grid[4][2].char = 5
+
+    
+
   }
 }
