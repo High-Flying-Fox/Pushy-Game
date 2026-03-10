@@ -10,11 +10,17 @@ class spot {
         push()
 
         translate(this.x, this.y)
-        //ImageMode(Center)
+        
 
-       // if (override == 7) {
-        //    rotate(pisdir)
-        //}
+        if (override == 7 || override == 8 || override == 9) {
+            
+            imageMode(CENTER)
+            angleMode(DEGREES)
+            translate(40, 40)
+            rotate((pisdir * 90) + 90)
+            
+            
+        }
 
         if (override == null) {
             image(costumes[this.char], 0, 0)
@@ -22,6 +28,7 @@ class spot {
             image(costumes[override], 0, 0)
         }
 
+        imageMode(CORNER)
         pop()
         
     }
@@ -32,9 +39,5 @@ class spot {
                 this.char = 3
             }
         }
-    }
-
-    trigger(freqency, signal) {
-
     }
 }
