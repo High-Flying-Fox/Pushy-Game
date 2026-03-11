@@ -22,6 +22,16 @@ class spot {
             
         }
 
+        if (override == 11 || override == 12 || override == 13 || override == 14 || override == 15 || override == 16 || override == 17 || override == 18) {
+            
+            imageMode(CENTER)
+            angleMode(DEGREES)
+            translate(40, 40)
+            rotate((fandir * 90) + 90)
+            
+            
+        }
+
         if (override == null) {
             image(costumes[this.char], 0, 0)
         } else {

@@ -6,7 +6,10 @@ let boxx = 3, boxy = 3
 let gatex = 3, gatey = 1
 let ykeyx = -1, ykeyy = -1
 let pisx = -1, pisy = -1, pisdir = 0
+let fanx = -1, fany = -1, fandir = 0, fanframe = 0, fanrange = [[], []]
 let plax = -1, play = -1, plapressed = false
+let Fplax = -1, Fplay = -1, Fplapressed = false
+let gametick = 0
 let level = 1
 
 function preload() {
@@ -21,6 +24,15 @@ function preload() {
   costumes[8] = loadImage("art/sprite_8.png")
   costumes[9] = loadImage("art/sprite_9.png")
   costumes[10] = loadImage("art/sprite_10.png")
+
+  costumes[11] = loadImage("art/fan/fan_0.png")
+  costumes[12] = loadImage("art/fan/fan_1.png")
+  costumes[13] = loadImage("art/fan/fan_2.png")
+  costumes[14] = loadImage("art/fan/fan_3.png")
+  costumes[15] = loadImage("art/fan/fan_4.png")
+  costumes[16] = loadImage("art/fan/fan_5.png")
+  costumes[17] = loadImage("art/fan/fan_6.png")
+  costumes[18] = loadImage("art/fan/fan_7.png")
 }
 
 function setup() {
@@ -50,6 +62,12 @@ function draw() {
         grid[i][j].show(2)
       } else if (j == pisx && i == pisy + 1 && pisdir == 2 && plapressed) {
         grid[i][j].show(9)
+      } else if (j == pisx && i == pisy - 1 && pisdir == 0 && plapressed) {
+        grid[i][j].show(9)
+      } else if (j == pisx + 1 && i == pisy && pisdir == 1 && plapressed) {
+        grid[i][j].show(9)
+      } else if (j == pisx - 1 && i == pisy && pisdir == -1 && plapressed) {
+        grid[i][j].show(9)
       } else if (j == boxx && i == boxy) {
         grid[i][j].show(0)
       } else if (j == gatex && i == gatey) {
@@ -64,6 +82,10 @@ function draw() {
         }
       } else if (j == plax && i == play) {
         grid[i][j].show(10)
+      } else if (j == Fplax && i == Fplay) {
+        grid[i][j].show(10)
+      } else if (j == fanx && i == fany) {
+        grid[i][j].show(11 + Math.floor(fanframe))
       } else {
         grid[i][j].show()
       }
@@ -78,8 +100,6 @@ function draw() {
 
   if (boxx == ykeyx && boxy == ykeyy) {
 
-    console.log("yellow key")
-
     ykeyx = -1
     ykeyy = -1
 
@@ -90,10 +110,40 @@ function draw() {
 
       }
     }
+
   }
+
+
 
   if (pisx == boxx && pisy + 1 == boxy && pisdir == 2 && plapressed) {
     boxy += 1
+  }
+  if (pisx == boxx && pisy - 1 == boxy && pisdir == 0 && plapressed) {
+    boxy -= 1
+  }
+  if (pisx + 1 == boxx && pisy == boxy && pisdir == 1 && plapressed) {
+    boxx += 1
+  }
+  if (pisx - 1 == boxx && pisy == boxy && pisdir == -1 && plapressed) {
+    boxx -= 1
+  }
+
+  let bo = false
+
+  for (i = 0; i < fanrange[0].length; i++) {
+    if (boxx == fanrange[0][i] && boxy == fanrange[1][i]) {
+      bo = true
+    }
+  }
+
+  if (bo) {
+    if (fandir == 0 && Fplapressed && gametick > 0.9) {
+      boxy -= 1
+    }
+  }
+
+  if (Fplapressed) {
+    fanframe = (fanframe + 0.1) % 7.5
   }
 
   if (boxx == plax && boxy == play || playerx == plax && playery == play) {
@@ -101,7 +151,14 @@ function draw() {
   } else {
     plapressed = false
   }
-  
+
+  if (boxx == Fplax && boxy == Fplay || playerx == Fplax && playery == Fplay) {
+    Fplapressed = true
+  } else {
+    Fplapressed = false
+  }
+
+  gametick = ((gametick += 0.1) %  1)
 }
 
 function Array2d(rows, cols) {
@@ -159,76 +216,3 @@ function keyPressed() {
     levelchange(level)
   }
 }
-
-
-
-function levelchange(level) {
-  if (level == 1) {
-    playerx = 1
-    playery = 1
-    boxx = 3
-    boxy = 3
-    gatex = 3
-    gatey = 1
-  }
-  if (level == 2) {
-    playerx = 1
-    playery = 1
-    boxx = 4
-    boxy = 4
-    gatex = 5
-    gatey = 2
-
-    grid[3][5].char = 4
-    grid[3][4].char = 4
-    grid[3][3].char = 4
-  }
-  if (level == 3) {
-    playerx = 1
-    playery = 1
-    boxx = 3
-    boxy = 2
-    gatex = 5
-    gatey = 5
-
-    ykeyx = 4
-    ykeyy = 2
-
-    grid[3][1].char = 4
-    grid[3][2].char = 5
-  }
-  if (level == 4) {
-    playerx = 1
-    playery = 4
-    boxx = 2
-    boxy = 2
-    gatex = 5
-    gatey = 5
-
-    ykeyx = 2
-    ykeyy = 1
-
-    pisx = 2
-    pisy = 0
-    pisdir = 2
-
-    plax = 5
-    play = 1
-
-    grid[3][1].char = 3
-    grid[3][3].char = 3
-    grid[3][4].char = 3
-    grid[3][5].char = 3
-
-    grid[1][1].char = 4
-    grid[1][4].char = 4
-
-    grid[4][4].char = 4
-    grid[4][5].char = 4
-    grid[2][4].char = 4
-
-    grid[5][4].char = 5
-
-  }
-}
-
