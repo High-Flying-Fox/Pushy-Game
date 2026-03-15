@@ -50,11 +50,11 @@ function preload() {
 // setup
 function setup() {
   // canvas
-  if (windowWidth >= 560) {
+  if (window.innerWidth >= 560) {
     createCanvas(560, 560);
   } else {
-    createCanvas(windowWidth, windowWidth);
-    tilesize = windowWidth / 7
+    createCanvas(window.innerWidth, window.innerWidth);
+    tilesize = window.innerWidth / 7
   }
   
   // grid
