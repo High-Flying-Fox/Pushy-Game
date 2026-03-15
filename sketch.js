@@ -2,6 +2,7 @@ let costumes = []
 let grid = []
 let rows = 7, cols = 7
 let touchx = 0, touchy = 0
+let tilesize = 80
 let gametick = 0
 let level = 1
 
@@ -53,6 +54,7 @@ function setup() {
     createCanvas(560, 560);
   } else {
     createCanvas(windowWidth, windowWidth);
+    tilesize = windowWidth / 7
   }
   
   // grid
@@ -60,7 +62,7 @@ function setup() {
 
   for (let i = 0; i < cols; i++) {
     for (let j = 0; j < rows; j++) {
-      grid[i][j] = new spot(4, j * 80, i * 80)
+      grid[i][j] = new spot(4, j * tilesize, i * tilesize)
     }
   }
 
