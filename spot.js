@@ -17,7 +17,7 @@ class spot {
             
             imageMode(CENTER)
             angleMode(DEGREES)
-            translate(40, 40)
+            translate(tilesize / 2, tilesize / 2)
             rotate((pisdir * 90) + 90)
             
             
@@ -28,7 +28,7 @@ class spot {
             
             imageMode(CENTER)
             angleMode(DEGREES)
-            translate(40, 40)
+            translate(tilesize / 2, tilesize / 2)
             rotate((fandir * 90) + 90)
             
             
@@ -36,9 +36,9 @@ class spot {
 
         // general override
         if (override == null) {
-            image(costumes[this.char], 0, 0)
+            image(costumes[this.char], 0, 0, tilesize, tilesize)
         } else {
-            image(costumes[override], 0, 0)
+            image(costumes[override], 0, 0, tilesize, tilesize)
         }
 
         imageMode(CORNER)
