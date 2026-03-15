@@ -6,12 +6,13 @@ class spot {
         this.char = char
     }
 
+    //display tiles
     show(override) {
         push()
 
         translate(this.x, this.y)
         
-
+        //piston override
         if (override == 7 || override == 8 || override == 9) {
             
             imageMode(CENTER)
@@ -22,6 +23,7 @@ class spot {
             
         }
 
+        //fan override
         if (override == 11 || override == 12 || override == 13 || override == 14 || override == 15 || override == 16 || override == 17 || override == 18) {
             
             imageMode(CENTER)
@@ -32,6 +34,7 @@ class spot {
             
         }
 
+        // general override
         if (override == null) {
             image(costumes[this.char], 0, 0)
         } else {
@@ -43,6 +46,7 @@ class spot {
         
     }
 
+    //lock stuff
     lock(color) {
         if (color == "y") {
             if (this.char == 5) {
