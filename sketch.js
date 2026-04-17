@@ -251,6 +251,9 @@ function keyPressed() {
 function mousePressed() {
   touchy = mouseY
   touchx = mouseX
+  console.log(touchx, touchy)
+
+  return false;
 }
 
 function mouseReleased() {
@@ -295,4 +298,6 @@ function mouseReleased() {
       }
     }
   }
+
+  return false;
 }
