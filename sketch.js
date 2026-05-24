@@ -49,6 +49,19 @@ function preload() {
 
 // setup
 function setup() {
+
+  //i hate mobile
+  document.addEventListener('touchmove', function(e) {
+    // Prevent default only if at the top of the page and swiping down
+    if (window.scrollY === 0 && e.touches[0].pageY > 0) {
+        e.preventDefault();
+    }
+  }, { passive: false });
+
+  document.addEventListener('touchmove', function(e) {
+    e.preventDefault();
+  }, { passive: false });
+
   // canvas
   if (window.innerWidth >= 560) {
     createCanvas(560, 560);
@@ -245,6 +258,8 @@ function keyPressed() {
   if (key == "r") {
     levelchange(level)
   }
+
+  return false;
 }
 
 // mouse/touch inputs
