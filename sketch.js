@@ -74,7 +74,7 @@ function setup() {
   resetbutton = createButton("Reset")
   resetbutton.position(0, height)
   resetbutton.addClass("middle")
-  resetbutton.mouseClicked(reset)
+  resetbutton.touchStarted(reset)
   reset.left = "auto"
 
   // grid
