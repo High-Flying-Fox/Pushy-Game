@@ -9,3 +9,13 @@ html, body {
 canvas {
   display: block;
 }
+
+.middle {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  left: auto !important;
+  width: 120px;
+  height: 30px;
+}
