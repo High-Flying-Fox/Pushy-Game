@@ -263,7 +263,7 @@ function keyPressed() {
 }
 
 // mouse/touch inputs
-function mousePressed() {
+function touchPressed() {
   touchy = mouseY
   touchx = mouseX
   console.log(touchx, touchy)
@@ -271,7 +271,7 @@ function mousePressed() {
   return false;
 }
 
-function mouseReleased() {
+function touchReleased() {
   
   if ((mouseY - touchy) >= 100) {
     if (grid[playery + 1][playerx].char == 3) {
