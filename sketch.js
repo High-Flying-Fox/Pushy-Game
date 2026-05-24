@@ -274,44 +274,46 @@ function touchStarted() {
 }
 
 function touchEnded() {
-  
-  if ((mouseY - touchy) >= 100) {
-    if (grid[playery + 1][playerx].char == 3) {
-      if (playery != boxy - 1 || playerx != boxx) {
-        playery += 1
-      } else if (grid[boxy + 1][boxx].char == 3) {
-        playery += 1
-        boxy += 1
+
+  if (touches.length > 0) {
+    if ((touches[0].y - touchy) >= 100) {
+      if (grid[playery + 1][playerx].char == 3) {
+        if (playery != boxy - 1 || playerx != boxx) {
+          playery += 1
+        } else if (grid[boxy + 1][boxx].char == 3) {
+          playery += 1
+          boxy += 1
+        }
       }
     }
-  }
-  if ((mouseY - touchy) <= -100) {
-    if (grid[playery - 1][playerx].char == 3) {
-      if (playery != boxy + 1 || playerx != boxx) {
-        playery -= 1
-      } else if (grid[boxy - 1][boxx].char == 3) {
-        playery -= 1
-        boxy -= 1
+    if ((touches[0].y - touchy) <= -100) {
+      if (grid[playery - 1][playerx].char == 3) {
+        if (playery != boxy + 1 || playerx != boxx) {
+          playery -= 1
+        } else if (grid[boxy - 1][boxx].char == 3) {
+          playery -= 1
+          boxy -= 1
+        }
       }
     }
-  }
-  if ((mouseX - touchx) >= 100) {
-    if (grid[playery][playerx + 1].char == 3) {
-      if (playerx != boxx - 1 || playery != boxy) {
-        playerx += 1
-      } else if (grid[boxy][boxx + 1].char == 3) {
-        playerx += 1
-        boxx += 1
+    if ((touches[0].x - touchx) >= 100) {
+      if (grid[playery][playerx + 1].char == 3) {
+        if (playerx != boxx - 1 || playery != boxy) {
+          playerx += 1
+        } else if (grid[boxy][boxx + 1].char == 3) {
+          playerx += 1
+          boxx += 1
+        }
       }
     }
-  }
-  if ((mouseX - touchx) <= -100) {
-    if (grid[playery][playerx - 1].char == 3) {
-      if (playerx != boxx + 1 || playery != boxy) {
-        playerx -= 1
-      } else if (grid[boxy][boxx - 1].char == 3) {
-        playerx -= 1
-        boxx -= 1
+    if ((touches[0].x - touchx) <= -100) {
+      if (grid[playery][playerx - 1].char == 3) {
+        if (playerx != boxx + 1 || playery != boxy) {
+          playerx -= 1
+        } else if (grid[boxy][boxx - 1].char == 3) {
+          playerx -= 1
+          boxx -= 1
+        }
       }
     }
   }
