@@ -5,10 +5,15 @@ html, body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  pointer-events: all;
 }
 
 canvas {
   display: block;
+  touch-action: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .middle {
