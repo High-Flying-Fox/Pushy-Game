@@ -323,3 +323,7 @@ function touchEnded() {
     }
   }
 }
+
+function touchMoved() {
+  return false; 
+}
