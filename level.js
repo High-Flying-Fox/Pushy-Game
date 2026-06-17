@@ -33,8 +33,8 @@ function levelchange(level) {
     grid[3][1].char = 4
     grid[3][2].char = 5
 
-    button = createButton("Reset")
-    button.addClass("middle")
+    //button = createButton("Reset")
+    //button.addClass("middle")
     
   }
   if (level == 4) {
