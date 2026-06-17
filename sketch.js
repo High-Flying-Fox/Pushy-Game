@@ -52,6 +52,18 @@ function preload() {
 // setup
 function setup() {
 
+  //i hate mobile
+  // document.addEventListener('touchmove', function(e) {
+  //   // Prevent default only if at the top of the page and swiping down
+  //   if (window.scrollY === 0 && e.touches[0].pageY > 0) {
+  //       e.preventDefault();
+  //   }
+  // }, { passive: false });
+
+  // document.addEventListener('touchmove', function(e) {
+  //   e.preventDefault();
+  // }, { passive: false });
+
   // canvas
   if (window.innerWidth >= 560) {
     createCanvas(560, 560);
@@ -269,7 +281,7 @@ function touchStarted() {
 function touchEnded() {
 
   if (touches.length > 0) {
-    if ((touches[0].y - touchy) >= 100) {
+    if ((touches[0].y - touchy) >= 25) {
       if (grid[playery + 1][playerx].char == 3) {
         if (playery != boxy - 1 || playerx != boxx) {
           playery += 1
@@ -279,7 +291,7 @@ function touchEnded() {
         }
       }
     }
-    if ((touches[0].y - touchy) <= -100) {
+    if ((touches[0].y - touchy) <= -25) {
       if (grid[playery - 1][playerx].char == 3) {
         if (playery != boxy + 1 || playerx != boxx) {
           playery -= 1
@@ -289,7 +301,7 @@ function touchEnded() {
         }
       }
     }
-    if ((touches[0].x - touchx) >= 100) {
+    if ((touches[0].x - touchx) >= 25) {
       if (grid[playery][playerx + 1].char == 3) {
         if (playerx != boxx - 1 || playery != boxy) {
           playerx += 1
@@ -299,7 +311,7 @@ function touchEnded() {
         }
       }
     }
-    if ((touches[0].x - touchx) <= -100) {
+    if ((touches[0].x - touchx) <= -25) {
       if (grid[playery][playerx - 1].char == 3) {
         if (playerx != boxx + 1 || playery != boxy) {
           playerx -= 1
