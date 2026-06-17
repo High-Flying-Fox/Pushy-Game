@@ -281,7 +281,8 @@ function touchStarted() {
 function touchEnded() {
 
   if (touches.length > 0) {
-    if ((touches[0].y - touchy) >= 25) {
+    for (let touches in touches) {
+      if ((touches[0].y - touchy) >= 25) {
       if (grid[playery + 1][playerx].char == 3) {
         if (playery != boxy - 1 || playerx != boxx) {
           playery += 1
@@ -321,6 +322,8 @@ function touchEnded() {
         }
       }
     }
+    }
+    
   }
 }
 
