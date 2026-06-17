@@ -5,6 +5,7 @@ let touchx = 0, touchy = 0
 let tilesize = 80
 let gametick = 0
 let level = 1
+let button
 
 let playerx = 1, playery = 1
 let boxx = 3, boxy = 3
@@ -16,7 +17,7 @@ let fanx = -1, fany = -1, fandir = 0, fanframe = 0, fanrange = [[], []]
 let plax = -1, play = -1, plapressed = false
 let Fplax = -1, Fplay = -1, Fplapressed = false
 
-let resetbutton
+
 
 //loads pixel art
 function preload() {
@@ -70,12 +71,6 @@ function setup() {
     createCanvas(window.innerWidth, window.innerWidth);
     tilesize = window.innerWidth / 7
   }
-
-  resetbutton = createButton("Reset")
-  resetbutton.position(0, height)
-  resetbutton.addClass("middle")
-  resetbutton.touchStarted(reset)
-  reset.left = "auto"
 
   // grid
   grid = Array2d(rows, cols)
@@ -287,7 +282,7 @@ function touchStarted() {
 function touchEnded() {
 
   if (touches.length > 0) {
-    if ((touches[0].y - touchy) >= 25) {
+    if ((touches[0].y - touchy) >= 100) {
       if (grid[playery + 1][playerx].char == 3) {
         if (playery != boxy - 1 || playerx != boxx) {
           playery += 1
@@ -297,7 +292,7 @@ function touchEnded() {
         }
       }
     }
-    if ((touches[0].y - touchy) <= -25) {
+    if ((touches[0].y - touchy) <= -100) {
       if (grid[playery - 1][playerx].char == 3) {
         if (playery != boxy + 1 || playerx != boxx) {
           playery -= 1
@@ -307,7 +302,7 @@ function touchEnded() {
         }
       }
     }
-    if ((touches[0].x - touchx) >= 25) {
+    if ((touches[0].x - touchx) >= 100) {
       if (grid[playery][playerx + 1].char == 3) {
         if (playerx != boxx - 1 || playery != boxy) {
           playerx += 1
@@ -317,7 +312,7 @@ function touchEnded() {
         }
       }
     }
-    if ((touches[0].x - touchx) <= -25) {
+    if ((touches[0].x - touchx) <= -100) {
       if (grid[playery][playerx - 1].char == 3) {
         if (playerx != boxx + 1 || playery != boxy) {
           playerx -= 1
