@@ -276,7 +276,6 @@ function touchStarted() {
   console.log(touches)
   }
 
-  return false;
 }
 
 function touchEnded() {
@@ -323,6 +322,4 @@ function touchEnded() {
       }
     }
   }
-
-  return false;
 }
