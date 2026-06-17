@@ -5,6 +5,7 @@ html, body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  pointer-events: all;
 }
 
 canvas {
