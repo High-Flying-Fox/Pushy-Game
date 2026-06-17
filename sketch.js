@@ -275,7 +275,7 @@ function touchStarted() {
   touchx = touches[0].y
   console.log(touches)
   }
-
+  return false
 }
 
 function touchEnded() {
