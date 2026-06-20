@@ -75,6 +75,13 @@ function setup() {
   left.addClass("middle")
   down.addClass("middle")
   re.addClass("middle")
+  up.mousePressed(mup)
+  right.mousePressed(mright)
+  left.mousePressed(mleft)
+  down.mousePressed(mdown)
+  re.mousePressed(reset)
+  
+
   // grid
   grid = Array2d(rows, cols)
 
@@ -220,4 +227,48 @@ function Array2d(rows, cols) {
 
 function reset() {
   levelchange(level)
+}
+
+function mdown() {
+  if (grid[playery + 1][playerx].char == 3) {
+      if (playery != boxy - 1 || playerx != boxx) {
+        playery += 1
+      } else if (grid[boxy + 1][boxx].char == 3) {
+        playery += 1
+        boxy += 1
+      }
+    }
+}
+
+function mup() {
+  if (grid[playery - 1][playerx].char == 3) {
+      if (playery != boxy + 1 || playerx != boxx) {
+        playery -= 1
+      } else if (grid[boxy - 1][boxx].char == 3) {
+        playery -= 1
+        boxy -= 1
+      }
+    }
+}
+
+function mright() {
+  if (grid[playery][playerx + 1].char == 3) {
+      if (playerx != boxx - 1 || playery != boxy) {
+        playerx += 1
+      } else if (grid[boxy][boxx + 1].char == 3) {
+        playerx += 1
+        boxx += 1
+      }
+    }
+}
+
+function mleft() {
+  if (grid[playery][playerx - 1].char == 3) {
+      if (playerx != boxx + 1 || playery != boxy) {
+        playerx -= 1
+      } else if (grid[boxy][boxx - 1].char == 3) {
+        playerx -= 1
+        boxx -= 1
+      }
+    }
 }
