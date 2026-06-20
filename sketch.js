@@ -1,11 +1,11 @@
 let costumes = []
 let grid = []
 let rows = 7, cols = 7
-let touchx = 0, touchy = 0
 let tilesize = 80
 let gametick = 0
 let level = 1
-let button
+let up,left,right,down,re
+let buttonwid = 560, buttonhei
 
 let playerx = 1, playery = 1
 let boxx = 3, boxy = 3
@@ -54,7 +54,6 @@ function setup() {
 
   //i hate mobile
   document.addEventListener('touchmove', function(e) {
-    // Prevent default only if at the top of the page and swiping down
     if (window.scrollY === 0 && e.touches[0].pageY > 0) {
         e.preventDefault();
     }
@@ -72,6 +71,21 @@ function setup() {
     tilesize = window.innerWidth / 7
   }
 
+  up = createButton("/\\")
+  up.parent(document.getElementById("up"))
+  left = createButton("<")
+  left.parent(document.getElementById("side"))
+  right = createButton(">")
+  right.parent(document.getElementById("side"))
+  down = createButton("\\/")
+  down.parent(document.getElementById("down"))
+  re = createButton("Reset")
+  re.parent(document.getElementById("reset"))
+  up.addClass("middle")
+  right.addClass("middle")
+  left.addClass("middle")
+  down.addClass("middle")
+  re.addClass("middle")
   // grid
   grid = Array2d(rows, cols)
 
@@ -215,118 +229,6 @@ function Array2d(rows, cols) {
   return arr
 }
 
-// keyboard inputs
-function keyPressed() {
-  if (key == "s" || key == "ArrowDown") {
-    if (grid[playery + 1][playerx].char == 3) {
-      if (playery != boxy - 1 || playerx != boxx) {
-        playery += 1
-      } else if (grid[boxy + 1][boxx].char == 3) {
-        playery += 1
-        boxy += 1
-      }
-    }
-  }
-  if (key == "w"|| key == "ArrowUp") {
-    if (grid[playery - 1][playerx].char == 3) {
-      if (playery != boxy + 1 || playerx != boxx) {
-        playery -= 1
-      } else if (grid[boxy - 1][boxx].char == 3) {
-        playery -= 1
-        boxy -= 1
-      }
-    }
-  }
-  if (key == "d"|| key == "ArrowRight") {
-    if (grid[playery][playerx + 1].char == 3) {
-      if (playerx != boxx - 1 || playery != boxy) {
-        playerx += 1
-      } else if (grid[boxy][boxx + 1].char == 3) {
-        playerx += 1
-        boxx += 1
-      }
-    }
-  }
-  if (key == "a"|| key == "ArrowLeft") {
-    if (grid[playery][playerx - 1].char == 3) {
-      if (playerx != boxx + 1 || playery != boxy) {
-        playerx -= 1
-      } else if (grid[boxy][boxx - 1].char == 3) {
-        playerx -= 1
-        boxx -= 1
-      }
-    }
-  }
-  if (key == "r") {
-    reset()
-  }
-
-  return false;
-}
-
 function reset() {
   levelchange(level)
-}
-
-// mouse/touch inputs
-function touchStarted() {
-  if (touches.length > 0) {
-  touchy = touches[0].x
-  touchx = touches[0].y
-  console.log(touches)
-  }
-  return false
-}
-
-function touchEnded() {
-
-  if (touches.length > 0) {
-    for (let touches in touches) {
-      if ((touches[0].y - touchy) >= 25) {
-      if (grid[playery + 1][playerx].char == 3) {
-        if (playery != boxy - 1 || playerx != boxx) {
-          playery += 1
-        } else if (grid[boxy + 1][boxx].char == 3) {
-          playery += 1
-          boxy += 1
-        }
-      }
-    }
-    if ((touches[0].y - touchy) <= -25) {
-      if (grid[playery - 1][playerx].char == 3) {
-        if (playery != boxy + 1 || playerx != boxx) {
-          playery -= 1
-        } else if (grid[boxy - 1][boxx].char == 3) {
-          playery -= 1
-          boxy -= 1
-        }
-      }
-    }
-    if ((touches[0].x - touchx) >= 25) {
-      if (grid[playery][playerx + 1].char == 3) {
-        if (playerx != boxx - 1 || playery != boxy) {
-          playerx += 1
-        } else if (grid[boxy][boxx + 1].char == 3) {
-          playerx += 1
-          boxx += 1
-        }
-      }
-    }
-    if ((touches[0].x - touchx) <= -25) {
-      if (grid[playery][playerx - 1].char == 3) {
-        if (playerx != boxx + 1 || playery != boxy) {
-          playerx -= 1
-        } else if (grid[boxy][boxx - 1].char == 3) {
-          playerx -= 1
-          boxx -= 1
-        }
-      }
-    }
-    }
-    
-  }
-}
-
-function touchMoved() {
-  return false; 
 }

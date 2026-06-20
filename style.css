@@ -4,7 +4,7 @@ html, body {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
+  flex-direction: column-reverse;
   pointer-events: all;
 }
 
@@ -18,10 +18,7 @@ canvas {
 
 .middle {
   position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   left: auto !important;
   width: 120px;
-  height: 30px;
+  height: 40px;
 }
