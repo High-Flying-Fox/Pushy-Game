@@ -60,6 +60,7 @@ function setup() {
     tilesize = window.innerWidth / 7
   }
 
+  //button stuff
   up = createButton("/\\")
   up.parent(document.getElementById("up"))
   left = createButton("<")
@@ -80,6 +81,11 @@ function setup() {
   left.mousePressed(mleft)
   down.mousePressed(mdown)
   re.mousePressed(reset)
+  up.touchStarted(mup)
+  right.touchStarted(mright)
+  left.touchStarted(mleft)
+  down.touchStarted(mdown)
+  re.touchStarted(reset)
   
 
   // grid
