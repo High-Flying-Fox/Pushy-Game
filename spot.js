@@ -4,6 +4,7 @@ class spot {
         this.x = dx
         this.y = dy
         this.char = char
+        this.convdir = null
     }
 
     //display tiles
@@ -30,6 +31,17 @@ class spot {
             angleMode(DEGREES)
             translate(tilesize / 2, tilesize / 2)
             rotate((fandir * 90) + 90)
+            
+            
+        }
+
+        //conveyor override
+        if (override == 19 || override == 20 || override == 21 || override == 22 || override == 23 || override == 24 || override == 25 || override == 26) {
+            
+            imageMode(CENTER)
+            angleMode(DEGREES)
+            translate(tilesize / 2, tilesize / 2)
+            rotate((this.convdir * 90) + 90)
             
             
         }
