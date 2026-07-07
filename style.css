@@ -5,6 +5,7 @@ html, body {
   justify-content: center;
   align-items: center;
   flex-direction: column-reverse;
+  background-color: #150918;
 }
 
 canvas {
