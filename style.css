@@ -4,8 +4,16 @@ html, body {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column-reverse;
 }
 
 canvas {
   display: block;
+}
+
+.middle {
+  position: relative;
+  left: auto !important;
+  width: 120px;
+  height: 40px;
 }
