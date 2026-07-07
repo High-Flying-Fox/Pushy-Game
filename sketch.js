@@ -61,6 +61,13 @@ function preload() {
 
   //spike tile
   costumes[27] = loadImage("art/sprite_8.png")
+
+  //letter tiles
+  costumes[28] = loadImage("art/sprite_9.png")
+  costumes[29] = loadImage("art/sprite_10.png")
+  costumes[30] = loadImage("art/sprite_11.png")
+  costumes[31] = loadImage("art/sprite_12.png")
+  costumes[32] = loadImage("art/sprite_13.png")
 }
 
 // setup
@@ -112,7 +119,6 @@ function setup() {
       grid[i][j].char = 3
     }
   }
-
   reset()
 } 
 
