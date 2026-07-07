@@ -3,7 +3,7 @@ let grid = []
 let rows = 7, cols = 7
 let tilesize = 80
 let gametick = 0
-let level = 5
+let level = 1
 let up,left,right,down,re
 let buttonwid = 560, buttonhei
 let aniframe = 0
