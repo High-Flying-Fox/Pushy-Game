@@ -221,4 +221,63 @@ function levelchange(level) {
     grid[2][1].char = 20
     grid[2][1].convdir = 0
   }
+  if (level == 8) {
+    playerx = 3
+    playery = 5
+    boxx = 3
+    boxy = 3
+    gatex = 4
+    gatey = 1
+    ykeyx = 2
+    ykeyy = 2
+
+    pisx = 2
+    pisy = 1
+    pisdir = 2
+    fanx = -1
+    fany = -1
+    fandir = 0
+    fanrange = [[],[]]
+    fplainvert = false
+    plax = 5
+    play = 5
+    Fplax = -1
+    Fplay = -1
+
+    grid[5][1].char = 3
+    grid[5][2].char = 3
+    grid[5][3].char = 3
+    grid[5][4].char = 3
+    grid[5][5].char = 3
+    grid[2][2].char = 3
+    grid[1][4].char = 3
+
+    grid[2][1].char = 4
+    grid[2][3].char = 4
+    grid[2][5].char = 4
+    grid[1][1].char = 4
+    grid[1][3].char = 4
+    grid[1][5].char = 4
+
+    grid[2][4].char = 5
+
+    grid[4][5].char = 20
+    grid[4][5].convdir = -1
+    grid[4][4].char = 20
+    grid[4][4].convdir = -1
+    grid[4][3].char = 20
+    grid[4][3].convdir = -1
+    grid[4][2].char = 20
+    grid[4][2].convdir = -1
+
+    grid[3][4].char = 20
+    grid[3][4].convdir = 1
+    grid[3][3].char = 20
+    grid[3][3].convdir = 1
+    grid[3][2].char = 20
+    grid[3][2].convdir = 1
+    grid[3][1].char = 20
+    grid[3][1].convdir = 1
+    
+  }
 }
