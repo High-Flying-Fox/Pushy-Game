@@ -124,7 +124,7 @@ function setup() {
 
 //main game loop
 function draw() {
-  background(220);
+  background("#150918");
   
 
   
