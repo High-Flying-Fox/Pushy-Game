@@ -6,6 +6,7 @@ function levelchange(level) {
     boxy = 3
     gatex = 3
     gatey = 1
+
   }
   if (level == 2) {
     playerx = 1
@@ -106,5 +107,49 @@ function levelchange(level) {
     grid[4][5].char = 3
 
 
+  }
+  if (level == 6) {
+    boxx = 2
+    boxy = 5
+    playerx = 4
+    playery = 5
+    gatey = 1
+    gatex = 2
+
+    pisx = -1
+    pisy = -1
+    fanx = 1
+    fany = 2
+    fandir = 1
+    fanrange = [[2],[2]]
+    fplainvert = true
+    plax = -1
+    play = -1
+    Fplax = 4
+    Fplay = 1
+
+    grid[1][3].char = 3
+
+    grid[2][2].char = 20
+    grid[3][2].char = 20
+    grid[4][2].char = 20
+    grid[5][2].char = 20
+    grid[2][2].convdir = 0
+    grid[3][2].convdir = 0
+    grid[4][2].convdir = 0
+    grid[5][2].convdir = 0
+
+    grid[1][1].char = 27
+    grid[3][1].char = 27
+    grid[4][1].char = 27
+    grid[5][1].char = 27
+    grid[1][3].char = 27
+    grid[2][3].char = 27
+    grid[3][3].char = 27
+    grid[4][3].char = 27
+    grid[5][3].char = 27
+    grid[2][4].char = 27
+    grid[3][4].char = 27
+    grid[4][4].char = 27
   }
 }

@@ -3,19 +3,20 @@ let grid = []
 let rows = 7, cols = 7
 let tilesize = 80
 let gametick = 0
-let level = 1
+let level = 5
 let up,left,right,down,re
 let buttonwid = 560, buttonhei
+let aniframe = 0
 
-let playerx = 1, playery = 1
-let boxx = 3, boxy = 3
+let playerx = 1, playery = 1, playermove = false
+let boxx = 3, boxy = 3, boxmove = false
 let gatex = 3, gatey = 1
 
 let ykeyx = -1, ykeyy = -1
 let pisx = -1, pisy = -1, pisdir = 0
 let fanx = -1, fany = -1, fandir = 0, fanframe = 0, fanrange = [[], []]
 let plax = -1, play = -1, plapressed = false
-let Fplax = -1, Fplay = -1, Fplapressed = false
+let Fplax = -1, Fplay = -1, Fplapressed = false, fplainvert = false
 
 
 
@@ -47,6 +48,19 @@ function preload() {
   costumes[16] = loadImage("art/fan/fan_5.png")
   costumes[17] = loadImage("art/fan/fan_6.png")
   costumes[18] = loadImage("art/fan/fan_7.png")
+
+  //conveyor tiles
+  costumes[19] = loadImage("art/conveyor/conveyor_0.png")
+  costumes[20] = loadImage("art/conveyor/conveyor_1.png")
+  costumes[21] = loadImage("art/conveyor/conveyor_2.png")
+  costumes[22] = loadImage("art/conveyor/conveyor_3.png")
+  costumes[23] = loadImage("art/conveyor/conveyor_4.png")
+  costumes[24] = loadImage("art/conveyor/conveyor_5.png")
+  costumes[25] = loadImage("art/conveyor/conveyor_6.png")
+  costumes[26] = loadImage("art/conveyor/conveyor_7.png")
+
+  //spike tile
+  costumes[27] = loadImage("art/sprite_8.png")
 }
 
 // setup
@@ -98,12 +112,16 @@ function setup() {
       grid[i][j].char = 3
     }
   }
+
+  reset()
 } 
 
 //main game loop
 function draw() {
   background(220);
+  
 
+  
   // grid run thought
   for (let i = 0; i < cols; i++) {
     for (let j = 0; j < rows; j++) {
@@ -137,8 +155,21 @@ function draw() {
         grid[i][j].show(10)
       } else if (j == fanx && i == fany) {
         grid[i][j].show(11 + Math.floor(fanframe))
+      } else if (grid[i][j].char == 20) {
+        grid[i][j].show(19 + Math.floor(aniframe))
       } else {
         grid[i][j].show()
+      }
+
+
+    }
+  }
+
+  //death check
+  for (let i = 0; i < cols; i++) {
+    for (let j = 0; j < rows; j++) {
+      if (((i == boxy && j == boxx) || (i == playery && j == playerx)) && grid[i][j].char == 27) {
+        reset()
       }
 
     }
@@ -164,17 +195,23 @@ function draw() {
   }
 
   // piston push mechanic
-  if (pisx == boxx && pisy + 1 == boxy && pisdir == 2 && plapressed) {
-    boxy += 1
-  }
-  if (pisx == boxx && pisy - 1 == boxy && pisdir == 0 && plapressed) {
-    boxy -= 1
-  }
-  if (pisx + 1 == boxx && pisy == boxy && pisdir == 1 && plapressed) {
-    boxx += 1
-  }
-  if (pisx - 1 == boxx && pisy == boxy && pisdir == -1 && plapressed) {
-    boxx -= 1
+  if (boxmove == false) {
+    if (pisx == boxx && pisy + 1 == boxy && pisdir == 2 && plapressed) {
+      boxy += 1
+      boxmove == true
+    }
+    if (pisx == boxx && pisy - 1 == boxy && pisdir == 0 && plapressed) {
+      boxy -= 1
+      boxmove == true
+    }
+    if (pisx + 1 == boxx && pisy == boxy && pisdir == 1 && plapressed) {
+      boxx += 1
+      boxmove == true
+    }
+    if (pisx - 1 == boxx && pisy == boxy && pisdir == -1 && plapressed) {
+      boxx -= 1
+      boxmove == true
+    }
   }
 
   // fan push mechanic
@@ -186,14 +223,40 @@ function draw() {
     }
   }
 
-  if (bo) {
-    if (fandir == 0 && Fplapressed && gametick > 3.9) {
-      boxy -= 1
+  if (bo && boxmove == false) {
+    boxmove == true
+    if (!fplainvert) {
+      if (fandir == 0 && Fplapressed && gametick > 3.9) {
+        bup()
+      }
+      if (fandir == -1 && Fplapressed && gametick > 3.9) {
+        bleft()
+      }
+      if (fandir == 1 && Fplapressed && gametick > 3.9) {
+        bright()
+      }
+      if (fandir == 2 && Fplapressed && gametick > 3.9) {
+        bdown()
+      }
+    } else {
+      if (fandir == 0 && !Fplapressed && gametick > 3.9) {
+        bup()
+      }
+      if (fandir == -1 && !Fplapressed && gametick > 3.9) {
+        bleft()
+      }
+      if (fandir == 1 && !Fplapressed && gametick > 3.9) {
+        bright()
+      }
+      if (fandir == 2 && !Fplapressed && gametick > 3.9) {
+        bdown()
+      }
     }
+    
   }
 
   // fan animation frame value
-  if (Fplapressed) {
+  if ((Fplapressed && !fplainvert) || (!Fplapressed && fplainvert)) {
     fanframe = (fanframe + 0.1) % 7.5
   }
 
@@ -204,12 +267,68 @@ function draw() {
     plapressed = false
   }
 
+  //conveyor move mechanic
+  playermove = false
+  boxmove = false
+  for (let i = 0; i < cols; i++) {
+    for (let j = 0; j < rows; j++) {
+      if (i == playery && j == playerx && (grid[i][j].char > 18 && grid[i][j].char < 27) && playermove == false) {
+        
+        if (grid[i][j].convdir == -1 && gametick > 3.9) {
+          playermove = true
+          mleft()  
+        }
+        if (grid[i][j].convdir == 0 && gametick > 3.9) {
+          playermove = true
+          mup()
+        }
+        if (grid[i][j].convdir == 1 && gametick > 3.9) {
+          playermove = true
+          mright()
+        }
+        if (grid[i][j].convdir == 2 && gametick > 3.9) {
+          playermove = true
+          mdown()
+        }
+      }
+
+      if (i == boxy && j == boxx && (grid[i][j].char > 18 && grid[i][j].char < 27) && boxmove == false) {
+        if (grid[i][j].convdir == -1 && gametick > 3.9) {
+          boxmove = true
+          bleft()   
+        }
+        if (grid[i][j].convdir == 0 && gametick > 3.9) {
+          boxmove = true
+          bup()
+            
+        }
+        if (grid[i][j].convdir == 1 && gametick > 3.9) {
+          boxmove = true
+          bright()
+            
+        }
+        if (grid[i][j].convdir == 2 && gametick > 3.9) {
+          boxmove = true
+          bdown()
+            
+        }
+        
+      }
+
+      
+      
+    }
+  }
+  
+
   // fan plate check
   if (boxx == Fplax && boxy == Fplay || playerx == Fplax && playery == Fplay) {
     Fplapressed = true
   } else {
     Fplapressed = false
   }
+  // animation frames
+  aniframe = (aniframe + 0.1) % 7.5
 
   // game tick set
   gametick = ((gametick += 0.1) %  4)
@@ -231,10 +350,10 @@ function reset() {
 }
 
 function mdown() {
-  if (grid[playery + 1][playerx].char == 3) {
+  if (grid[playery + 1][playerx].char == 3 || grid[playery + 1][playerx].char == 20 || grid[playery + 1][playerx].char == 27) {
       if (playery != boxy - 1 || playerx != boxx) {
         playery += 1
-      } else if (grid[boxy + 1][boxx].char == 3) {
+      } else if (grid[boxy + 1][boxx].char == 3 || grid[boxy + 1][boxx].char == 20 || grid[boxy + 1][boxx].char == 27) {
         playery += 1
         boxy += 1
       }
@@ -242,10 +361,10 @@ function mdown() {
 }
 
 function mup() {
-  if (grid[playery - 1][playerx].char == 3) {
+  if (grid[playery - 1][playerx].char == 3 || grid[playery - 1][playerx].char == 20 || grid[playery - 1][playerx].char == 27) {
       if (playery != boxy + 1 || playerx != boxx) {
         playery -= 1
-      } else if (grid[boxy - 1][boxx].char == 3) {
+      } else if (grid[boxy - 1][boxx].char == 3 || grid[boxy - 1][boxx].char == 20 || grid[boxy - 1][boxx].char == 27) {
         playery -= 1
         boxy -= 1
       }
@@ -253,10 +372,10 @@ function mup() {
 }
 
 function mright() {
-  if (grid[playery][playerx + 1].char == 3) {
+  if (grid[playery][playerx + 1].char == 3 || grid[playery][playerx + 1].char == 20 || grid[playery][playerx + 1].char == 27) {
       if (playerx != boxx - 1 || playery != boxy) {
         playerx += 1
-      } else if (grid[boxy][boxx + 1].char == 3) {
+      } else if (grid[boxy][boxx + 1].char == 3 || grid[boxy][boxx + 1].char == 20 || grid[boxy][boxx + 1].char == 27) {
         playerx += 1
         boxx += 1
       }
@@ -264,12 +383,36 @@ function mright() {
 }
 
 function mleft() {
-  if (grid[playery][playerx - 1].char == 3) {
+  if (grid[playery][playerx - 1].char == 3 || grid[playery][playerx - 1].char == 20 || grid[playery][playerx - 1].char == 27) {
       if (playerx != boxx + 1 || playery != boxy) {
         playerx -= 1
-      } else if (grid[boxy][boxx - 1].char == 3) {
+      } else if (grid[boxy][boxx - 1].char == 3 || grid[boxy][boxx - 1].char == 20 || grid[boxy][boxx - 1].char == 27) {
         playerx -= 1
         boxx -= 1
       }
     }
+}
+
+function bdown() {
+  if (grid[boxy + 1][boxx].char == 3 || grid[boxy + 1][boxx].char == 20 || grid[boxy + 1][boxx].char == 27) {
+            boxy += 1
+          }
+}
+
+function bup() {
+  if (grid[boxy - 1][boxx].char == 3 || grid[boxy - 1][boxx].char == 20 || grid[boxy - 1][boxx].char == 27) {
+            boxy -= 1
+          }
+}
+
+function bright() {
+  if (grid[boxy][boxx + 1].char == 3 || grid[boxy][boxx + 1].char == 20 || grid[boxy][boxx + 1].char == 27) {
+            boxx += 1
+          }
+}
+
+function bleft() {
+  if (grid[boxy][boxx - 1].char == 3 || grid[boxy][boxx - 1].char == 20 || grid[boxy][boxx - 1].char == 27) {
+            boxx -= 1
+          }
 }
